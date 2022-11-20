@@ -1,0 +1,11 @@
+my_calendar_name:
+   ical_url: https://www.judovlaanderen.be/?post_type=tribe_events&tribe-bar-date=2022-11-18&ical=1&eventDisplay=list
+   timezone: Europe/Brussels # (optional) ensure all time comparisons are done in this TZ
+   rules:
+      - field: summary # summary and description supported
+        operator: startswith # startswith and not-startswith supported
+        val: # array of values also supported
+          - RTT
+          - PTT
+          - PKT
+          - RKT
