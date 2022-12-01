@@ -1,5 +1,5 @@
 judo_vlaanderen:
-   ical_url: https://www.judovlaanderen.be/?post_type=tribe_events&tribe-bar-date=2022-11-18&ical=1&eventDisplay=list
+   ical_url: https://www.judovlaanderen.be/?post_type=tribe_events&ical=1&eventDisplay=list
    timezone: Europe/Brussels # (optional) ensure all time comparisons are done in this TZ
    rules:
       - field: summary # summary and description supported
