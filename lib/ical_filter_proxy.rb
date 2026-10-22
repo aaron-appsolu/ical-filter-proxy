@@ -6,29 +6,31 @@ require 'open-uri'
 require 'icalendar'
 require 'yaml'
 require 'forwardable'
+require 'to_regexp'
 
+require_relative 'ical_filter_proxy/alarm_trigger'
 require_relative 'ical_filter_proxy/calendar'
 require_relative 'ical_filter_proxy/filter_rule'
+require_relative 'ical_filter_proxy/calendar_builder'
 require_relative 'ical_filter_proxy/filterable_event_adapter'
 
 module IcalFilterProxy
-  def self.filters
-    config.each_with_object({}) do |(filter_name, filter_config), filters|
-      calendar = Calendar.new(filter_config["ical_url"], filter_config["api_key"], filter_config["timezone"])
-
-      filter_config["rules"].each do |rule|
-        calendar.add_rule(rule["field"], rule["operator"], rule["val"])
-      end
-
-      filters[filter_name] = calendar
+  def self.calendars
+    config.transform_values do |calendar_config|
+      CalendarBuilder.new(calendar_config).build
     end
   end
 
   def self.config
-    YAML.safe_load(File.read(config_file_path))
+    content = File.read(config_file_path, :encoding => 'UTF-8')
+    content.gsub! /\${(ICAL_FILTER_PROXY_[^}]+)}/ do
+      ENV[$1]
+    end
+    YAML.safe_load(content)
   end
 
   def self.config_file_path
     File.expand_path('../config.yml', __dir__)
   end
+
 end
