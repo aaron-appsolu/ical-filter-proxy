@@ -58,7 +58,8 @@ module IcalFilterProxy
     end
 
     def raw_original_ical
-      URI.open(ical_url).read
+      # The source sits behind Bunny Shield, which only lets known calendar clients through
+      URI.open(ical_url, "User-Agent" => "Google-Calendar-Importer").read
     end
   end
 end
