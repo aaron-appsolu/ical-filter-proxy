@@ -39,7 +39,8 @@ module IcalFilterProxy
     end
 
     def raw_original_ical
-      open(ical_url, "User-Agent" => "Mozilla/5.0 (compatible; ical-filter-proxy)").read
+      # The source sits behind Bunny Shield, which only lets known calendar clients through
+      open(ical_url, "User-Agent" => "Google-Calendar-Importer").read
     end
   end
 end
