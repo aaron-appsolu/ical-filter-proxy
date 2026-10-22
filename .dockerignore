@@ -5,6 +5,7 @@
 !/Gemfile
 !/Gemfile.lock
 !/config.ru
+!/config.yml
 !/lib
 
 # Ignore unnecessary files inside allowed directories
