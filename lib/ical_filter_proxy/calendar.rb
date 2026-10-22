@@ -39,7 +39,7 @@ module IcalFilterProxy
     end
 
     def raw_original_ical
-      open(ical_url).read
+      open(ical_url, "User-Agent" => "Mozilla/5.0 (compatible; ical-filter-proxy)").read
     end
   end
 end
